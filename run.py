@@ -8,6 +8,11 @@ import gspread
 
 # Rest of your imports
 
+# Initialize the Google Sheets connection
+gc = gspread.service_account(filename='cred.json')
+sh = gc.open('Flight Departure Scraper').sheet1
+
+
 # This is the link for the departure search page
 website = 'https://apps.atl.com/passenger/flightinfo/search.aspx'
 
