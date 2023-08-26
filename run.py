@@ -1,15 +1,12 @@
 import time
 import pandas as pd
-from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 import gspread
-from selenium import webdriver
 
-# Initialize the Google Sheets connection
-gc = gspread.service_account(filename='cred.json')
-sh = gc.open('Flight Departure Scraper').sheet1
+# Rest of your imports
 
 # This is the link for the departure search page
 website = 'https://apps.atl.com/passenger/flightinfo/search.aspx'
@@ -21,14 +18,10 @@ chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-# Set up the Chrome driver service
-service = Service(executable_path="chromedriver", chrome_options=chrome_options)
-
-# Use the provided ChromeDriver executable path
-driver = webdriver.Chrome(service=service)
+# Initialize the Chrome driver with the options
+driver = webdriver.Chrome(options=chrome_options)
 
 driver.get(website)
-
 # Click on the element you want to interact with (replace with correct XPath)
 Click1 = driver.find_element(By.XPATH, '/html/body/form/section/div[4]/div/div/div[1]/span[2]/span/span/a')
 Click1.click()
