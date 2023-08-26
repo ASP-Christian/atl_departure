@@ -1,8 +1,7 @@
-name: Scheduled Task
+name: Manual Run
 
 on:
-  schedule:
-    - cron: '40 0 * * *'  # Runs at midnight every day
+  workflow_dispatch:  # Triggered manually
 
 jobs:
   run-script:
