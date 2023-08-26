@@ -1,0 +1,21 @@
+name: Scheduled Task
+
+on:
+  schedule:
+    - cron: '40 0 * * *'  # Runs at midnight every day
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Run script
+      run: python path/to/your/run.py
