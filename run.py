@@ -1,25 +1,31 @@
 import time
 import pandas as pd
-from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException, NoSuchElementException
 import gspread
+from selenium import webdriver
 
 # Initialize the Google Sheets connection
 gc = gspread.service_account(filename='cred.json')
 sh = gc.open('Flight Departure Scraper').sheet1
 
-# Input the path to your ChromeDriver executable
-chrome_driver_path = r"C:\Users\calgo\Downloads\CHROME DRIVER 116\chromedriver-win64\chromedriver.exe"
-
-# Input the path to your ChromeDriver executable
-chrome_driver_path = r"C:\Users\calgo\Downloads\CHROME DRIVER 116\chromedriver-win64\chromedriver.exe"
-
-# This is the link for Luminsons Career Page
+# This is the link for the departure search page
 website = 'https://apps.atl.com/passenger/flightinfo/search.aspx'
 
+# GitHub Actions provides a virtual display, so set headless mode
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+# Set up the Chrome driver service
+service = Service(executable_path="chromedriver", chrome_options=chrome_options)
+
 # Use the provided ChromeDriver executable path
-driver = webdriver.Chrome(executable_path=chrome_driver_path)
+driver = webdriver.Chrome(service=service)
 
 driver.get(website)
 
