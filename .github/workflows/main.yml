@@ -16,6 +16,9 @@ jobs:
       with:
         python-version: 3.x
 
+    - name: Install Chrome and Chrome driver
+      uses: browser-actions/setup-chrome@v1
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
